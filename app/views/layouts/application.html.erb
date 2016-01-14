@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<% if session[:errors] %>
+  <p style="color: red"><%= session[:errors] %></p>
+<% end %>
+
 <%= yield %>
 
 </body>

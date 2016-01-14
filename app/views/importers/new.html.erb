@@ -1,0 +1,12 @@
+<h1>Importer new data file</h1>
+
+
+<%= form_tag importers_path, multipart: true do %>
+  <p>
+    Notice to Airmen data file:
+    <br/>
+    <%= file_field_tag :data %>
+
+    <%= submit_tag 'Upload' %>
+  </p>
+<%- end %>
