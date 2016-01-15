@@ -1,28 +1,31 @@
-== README
+= StrataJet Opening Times data file importer.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Download the code from:
 
-Things you may want to cover:
+    https://github.com/dwhenry/stratajet-opening-times
 
-* Ruby version
+2. Ensure you have a copy of ruby 2.1.3 (use .ruby_version file)
 
-* System dependencies
+3. Run bundler
 
-* Configuration
+4. Run migrations (use sqlite3 database)
 
-* Database creation
+    bundle exec rake db:migrate
 
-* Database initialization
+5. Start the server
 
-* How to run the test suite
+    bundle exec rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+6. Navigate to the application in your browser
 
-* Deployment instructions
+    http://localhost:3000
 
-* ...
+7. Import the raw data file (button on the main page)
 
+== Notes:
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Integration test has not been implemented, this is due to simplicity of task and time required to add this functionality.
+* Refactoring of OpeningTime.build method to a Builder class would be the next logical refactoring to help keen the model lean.
+* Most invalid file will successfully import, this is due to the filtering  performed in the import function.
+* An import that does not add/update any OpeningTime records is consider successful, this is most likely NOT the case in a real world environment.
+* Date ranges that cover monday will NOT work. i.e. SUN-TUE is considered imvalid with the current implementation.
