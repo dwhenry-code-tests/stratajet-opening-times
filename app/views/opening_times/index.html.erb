@@ -1,0 +1,36 @@
+
+<h1>Listing Opening Times</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ICAO</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @opening_times.each do |opening_time| %>
+      <tr>
+        <td><%= opening_time.icao %></td>
+        <td><%= multi_line opening_time.monday %></td>
+        <td><%= multi_line opening_time.tuesday %></td>
+        <td><%= multi_line opening_time.wednesday %></td>
+        <td><%= multi_line opening_time.thursday %></td>
+        <td><%= multi_line opening_time.friday %></td>
+        <td><%= multi_line opening_time.saturday %></td>
+        <td><%= multi_line opening_time.sunday %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= button_to 'Import New File', new_importers_path, method: :get %>

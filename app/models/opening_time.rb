@@ -9,6 +9,13 @@ class OpeningTime < ActiveRecord::Base
     'SAT' => 'FRI',
     'SUN' => 'SAT',
   }
+
+  # don't like hard coding different ways of writting closed.
+  TIME_MAP = {
+    'CLOSED' => 'CLOSED',
+    'CLSD' => 'CLOSED',
+  }
+
   class << self
     # This code could potentially be extracted to a builder class
     def build(data)
@@ -32,7 +39,7 @@ class OpeningTime < ActiveRecord::Base
         friday: extract(time_data, 'FRI'),
         saturday: extract(time_data, 'SAT'),
         sunday: extract(time_data, 'SUN'),
-        raw: time_data, 
+        raw: time_data,
       }
     end
 
@@ -40,10 +47,11 @@ class OpeningTime < ActiveRecord::Base
       raise "Unable to find data within: #{time_data}" if day.nil?
 
       # extract time data or the word CLOSED for the given day
-      match = time_data.match(/#{day}(?:-\w{3})#{'?' unless range_required}\s*([0-9\-\s]+|CLOSED)/)
+      match = time_data.match(/#{day}(?:-\w{3})#{'?' unless range_required}\s*([0-9\-\s]+|#{TIME_MAP.keys.join('|')})/)
 
       if match
-        match[1].strip
+        time = match[1].strip
+        TIME_MAP[time] || time
       else
         extract(time_data, PREVIOUS_DAY[day], range_required: true)
       end
