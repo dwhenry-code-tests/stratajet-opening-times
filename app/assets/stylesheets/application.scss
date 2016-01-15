@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+#alert {
+  color: red;
+}
+
+#notice {
+  color: green;
+}
+
+table {
+  text-align: center;
+
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+
+  thead {
+    background: #CCCCCC;
+    border-radius: 10px 10px 0 0;
+  }
+  td, th {
+    padding: 10px 4px;
+  }
+  tr {
+    border-bottom: 1px solid #CCCCCC;
+  &:last-child {
+     border-bottom: none;
+   }
+  }
+  td .no-wrap {
+    width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: right;
+  }
+}

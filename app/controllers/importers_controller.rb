@@ -7,14 +7,14 @@ class ImportersController < ApplicationController
       importer = Importer.new
       data = params[:data].tempfile.read
       if importer.process(data)
-        # TODO: change this to opening_times path once implemented
-        redirect_to new_importers_path
+        flash[:notice] = 'File successfully imported'
+        redirect_to opening_times_path
       else
-        session[:errors] = importer.error
+        flash[:alert] = importer.errors
         render :new
       end
     else
-      session[:errors] = 'Please select a file to upload'
+      flash[:alert] = 'Please select a file to upload'
       render :new
     end
   end
