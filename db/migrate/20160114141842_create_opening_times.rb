@@ -9,6 +9,7 @@ class CreateOpeningTimes < ActiveRecord::Migration
       t.string :friday
       t.string :saturday
       t.string :sunday
+      t.string :raw
 
       t.timestamps null: false
     end
